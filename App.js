@@ -1,23 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
-import axios from 'axios';
-
-const getPopularMovies = ()=>{
-  const resp = axios.get('https://api.themoviedb.org/3/movie/popular?api_key=5e5d4986d46e005eba45fd98f8b0191b')
-  console.log(resp);
-}
-
+import {getPopularMovies} from './services/services';
 
 const App = () => {
+  const [movie, setMovie] = useState('');
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    getPopularMovies()
+      .then(movies => {
+        setMovie(movies[0]);
+      })
+      .catch(err => {
+        setError(err);
+      });
+  }, []);
+
   return (
-    getPopularMovies();
     <View
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>Hola HdlCm</Text>
+      <Text>Nombre: {movie.original_title}</Text>
+      <Text>Idioma: {movie.original_language}</Text>
+      <Text>Fecha: {movie.release_date}</Text>
+      {error && <Text style={{color: 'red'}}>Error en el servidor</Text>}
     </View>
   );
 };
