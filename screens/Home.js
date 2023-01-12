@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
+import {Text, View, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import {getPopularMovies, getUpcomingMovies} from '../services/services';
 import {SliderBox} from 'react-native-image-slider-box';
 import react from 'react';
@@ -35,18 +35,20 @@ const Home = () => {
 
   return (
     <react.Fragment>
-      <View style={styles.sliderContainer}>
-        <SliderBox
-          images={moviesImages}
-          dotStyle={styles.sliderStyle}
-          sliderBoxHeight={dimentions.height / 1.5}
-          autoplay={true}
-          circleLoop={true}
-        />
-      </View>
-      <View style={styles.carousel}>
-        <List title="Title example" content={popularMovies}></List>
-      </View>
+      <ScrollView>
+        <View style={styles.sliderContainer}>
+          <SliderBox
+            images={moviesImages}
+            dotStyle={styles.sliderStyle}
+            sliderBoxHeight={dimentions.height / 1.5}
+            autoplay={true}
+            circleLoop={true}
+          />
+        </View>
+        <View style={styles.carousel}>
+          <List title="Title example" content={popularMovies}></List>
+        </View>
+      </ScrollView>
     </react.Fragment>
   );
 };
