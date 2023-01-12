@@ -1,7 +1,12 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
+import PropTypes from 'prop-types';
 
 const placeholderImage = require('../assets/images/placeholder.jpg');
+
+const propTypes = {
+  item: PropTypes.object,
+};
 
 class Card extends React.PureComponent {
   render() {
@@ -24,12 +29,12 @@ class Card extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-    movieName: {
-        position: 'absolute',
-        width: 100,
-        textAlign: 'center',
-        top: 10,
-    },
+  movieName: {
+    position: 'absolute',
+    width: 100,
+    textAlign: 'center',
+    top: 10,
+  },
   image: {
     height: 200,
     width: 120,
@@ -38,9 +43,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 5,
     position: 'relative',
-    alignItems: 'center',    
-    height:200,
+    alignItems: 'center',
+    height: 200,
   },
 });
 
+Card.propTypes = propTypes;
 export default Card;
