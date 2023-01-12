@@ -57,3 +57,12 @@ Make sure you check the following package.json to check the version we use in ca
         "metro-react-native-babel-preset": "^0.65.2",
         "react-test-renderer": "17.0.1"
       },
+
+Installing dependencies with node:
+
+npm i react-native-image-slider-box
+
+<Text>Nombre: {movie.original_title}</Text>
+      <Text>Idioma: {movie.original_language}</Text>
+      <Text>Fecha: {movie.release_date}</Text>
+      {error && <Text style={{color: 'red'}}>Error en el servidor</Text>}
