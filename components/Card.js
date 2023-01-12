@@ -22,7 +22,9 @@ class Card extends React.PureComponent {
               : placeholderImage
           }
         />
-        {!item.poster_path && <Text style={style.movieName}>{item.title}</Text>}
+        {!item.poster_path && (
+          <Text style={styles.movieName}>{item.title}</Text>
+        )}
       </TouchableOpacity>
     );
   }

@@ -64,7 +64,7 @@ const Home = () => {
         },
       )
       .catch(err => {
-        setError(err);
+        setError(true);
       }).finally(()=>{
         setLoaded(true);
       });
@@ -72,7 +72,8 @@ const Home = () => {
 
   return (
     <react.Fragment>
-      {loaded && (
+      {/* Upcoming Movies */}
+      {loaded && !error && (
         <ScrollView>
           {moviesImages && (
             <View style={styles.sliderContainer}>
