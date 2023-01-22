@@ -8,8 +8,8 @@ const propTypes = {
 };
 
 const defaultProps = {
-  errorText1: 'Upss! Algo falló.',
-  errorText2: 'Revisa tu conexión o reinicia tu APP.',
+  errorText1: 'Oops! Something went wrong.',
+  errorText2: 'Make sure you are online and restart the App',
 };
 
 class Error extends React.PureComponent {

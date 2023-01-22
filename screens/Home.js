@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import {
   getPopularMovies,
-  getPopularTv,
   getUpcomingMovies,
+  getPopularTv,
   getFamilyMovies,
-  getDocumentary,
+  getDocumentaryMovies,
 } from '../services/services';
 import {SliderBox} from 'react-native-image-slider-box';
 import react from 'react';
@@ -19,12 +19,12 @@ import List from '../components/List';
 import Error from '../components/Error';
 
 const dimentions = Dimensions.get('screen');
-const Home = () => {
+const Home = ({navigation}) => {
   const [moviesImages, setMoviesImages] = useState();
   const [popularMovies, setPopularMovies] = useState();
   const [popularTv, setPopularTv] = useState();
   const [familyMovies, setFamilyMovies] = useState();
-  const [documentary, setDocumentary] = useState();
+  const [documentaryMovies, setDocumentaryMovies] = useState();
 
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -35,9 +35,10 @@ const Home = () => {
       getPopularMovies(),
       getPopularTv(),
       getFamilyMovies(),
-      getDocumentary(),
+      getDocumentaryMovies(),
     ]);
   };
+
   useEffect(() => {
     getData()
       .then(
@@ -46,7 +47,7 @@ const Home = () => {
           popularMoviesData,
           popularTvData,
           familyMoviesData,
-          documentaryData,
+          documentaryMoviesData,
         ]) => {
           const moviesImagesArray = [];
           upcomingMoviesData.forEach(movie => {
@@ -59,13 +60,13 @@ const Home = () => {
           setPopularMovies(popularMoviesData);
           setPopularTv(popularTvData);
           setFamilyMovies(familyMoviesData);
-          setDocumentary(documentaryData);
-          
+          setDocumentaryMovies(documentaryMoviesData);
         },
       )
-      .catch(err => {
+      .catch(() => {
         setError(true);
-      }).finally(()=>{
+      })
+      .finally(() => {
         setLoaded(true);
       });
   }, []);
@@ -86,37 +87,50 @@ const Home = () => {
               />
             </View>
           )}
-          {/*popular Movies*/}
+          {/* Popular Movies */}
           {popularMovies && (
             <View style={styles.carousel}>
-              <List title="Películas populares" content={popularMovies} />
+              <List
+                navigation={navigation}
+                title={'Popular Movies'}
+                content={popularMovies}
+              />
             </View>
           )}
-          {/*popular TV*/}
+          {/* Popular TV Shows */}
           {popularTv && (
             <View style={styles.carousel}>
               <List
-                title="Series y programas de Tv populares"
+                navigation={navigation}
+                title={'Popular TV Shows'}
                 content={popularTv}
               />
             </View>
           )}
-          {/*family Movies*/}
+          {/* Family Movies */}
           {familyMovies && (
             <View style={styles.carousel}>
-              <List title="Contenido familiar" content={familyMovies} />
+              <List
+                navigation={navigation}
+                title={'Family Movies'}
+                content={familyMovies}
+              />
             </View>
           )}
-          {/*documentary*/}
-          {documentary && (
+          {/* Documentary Movies */}
+          {documentaryMovies && (
             <View style={styles.carousel}>
-              <List title="Documentales" content={documentary} />
+              <List
+                navigation={navigation}
+                title={'Documentary Movies'}
+                content={documentaryMovies}
+              />
             </View>
           )}
         </ScrollView>
       )}
       {!loaded && <ActivityIndicator size="large" />}
-      {error && <Error/>}
+      {error && <Error />}
     </react.Fragment>
   );
 };
